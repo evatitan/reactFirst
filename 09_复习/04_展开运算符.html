@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let arr1 = [1,3,5,7,9]
+        let arr2 = [2,4,6,8,10]
+
+        // 1. 用法一 展开一个数组
+        console.log(...arr1)  //  1 3 5 7 9 
+        console.log(arr1)     //  [ 1, 3, 5, 7, 9 ]
+
+        // 2. 用法二  连接数组
+        let arr3 = [...arr1,...arr2] //  [ 1, 3, 5, 7, 9, 2, 4, 6, 8, 10 ]  
+        console.log(arr3) 
+
+        // 3. 用法三 函数中传参数
+        function sum(...numbers){
+            return numbers.reduce((preValue,currentValue)=>{
+                return preValue+currentValue
+            })
+        }
+        console.log(sum(...arr1,...arr2))  // 55 
+
+        // 4. 构造字面量对象时使用展开语法
+        let person = {name:'Tom',age:18}  
+        let person2 = {...person}  // 运算符如果使用花括号 { } 包裹，则是复制了一个新的对象，可以遍历对象。
+        //console.log(...Person)   //  报错：Person is not iterable， 展开运算符不能展开一个对象
+        person.name= "Jerry"
+        console.log(person2) // Object { name: "Tom", age: 18 }
+        console.log(person) // Object { name: "Jerry", age: 18 }
+
+
+        // 5. 复制对象时，改变其属性，属于合并的动作。
+        let person3 = {...person,name:"Jack", adress:"USA"}
+        console.log(person3)   // Object { name: "Jack", age: 18, adress: "USA" }
+
+    </script>
+    
+</body>
+</html>
