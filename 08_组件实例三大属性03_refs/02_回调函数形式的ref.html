@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_字符串形式的ref</title>
+</head>
+<body><!---->
+    <!--建立一个容器-->
+    <div id="test"></div>
+
+    <!--引入react核心库-->
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <!--引入react-dom,用于支持react-->
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <!--引入babel,用于将jsx转化为js-->
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+
+
+    <script type="text/babel">  // 此处一定要挟babel。
+    // 创建class组件
+    class Demo extends React.Component{
+
+        showDateLeft = ()=>{
+            //console.log(this.refs.input1)
+            // 经过回调函数形式使用ref，已经直接可以在实例自身上面获取input1的值（this），不需要this.refs。
+            const {input1} = this
+            alert(input1.value)
+        }
+
+        showDateRight =()=>{
+            const {input2} = this
+            alert(input2.value)
+        }
+
+        render(){
+            return (
+                /**
+                 * 1.  currentNode 表示ref目前所处的DOM节点，当render在启动遇到这个ref的回调函数时，react进行调用且将currentNode所处节点（实参）也传进去这个函数中，然后把这个节点放在了组件实例自身上，并命名为input1。
+                 * 2. 此处的this是实例对象。
+                 * 3. 把ref当前所处的节点挂在了实例对象上，并取名input1。
+                */
+                <div>
+                    {/*回调函数形式的ref形式
+                        1. 略麻烦，react不会自主收集DOM节点
+                        2. 大多数使用內联回调函数形式。
+                        3. 存在更新过程中会被执行两次的问题。第一次传入参数是null，第二次是传入参数DOM节点。见03_回调ref中回调执行次数问题。使用class的绑定函数方式（this.saveInput），但是无关紧要。
+                    */}
+                    <input ref={currentNode => this.input1 = currentNode} type="text" placeholder="点击按钮提示数据"/>&nbsp;
+                    <button onClick={this.showDateLeft}>点我提示左侧的数据</button>&nbsp;
+                    <input ref={currentNode => this.input2 = currentNode} onBlur = {this.showDateRight} type="text" placeholder="失去焦点提示数据"/>
+                </div>
+            )
+        }
+    }
+    //渲染class组件
+    ReactDOM.render(<Demo/>,document.getElementById('test'))
+    </script>
+</body>
+</html>
