@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type='text/javascript'>
+        function demo(){
+            console.log(this)
+        }
+        demo()
+        // bind 有两个作用，一个是改变this的指向，另一个是生成另一个函数，但是需要赋值出去（X），再进行直接调用（由X直接调用），此时 bind 将this改为了新的对象{a:1,b:2}。
+        const x = demo.bind({a:1,b:2})
+        x()
+    </script>
+
+</body>
+</html>
