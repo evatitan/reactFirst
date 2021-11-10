@@ -25,7 +25,7 @@
         class Person extends React.Component{
 
             constructor(props){
-                // 构造器是否接受props，是否传递给super，取决于：你是否希望在构造器中通过this访问props（其实这种情况很少）？ 如果没有这个需求，则不需要constructor，在开发环境中，基本不用。
+                // 构造器是否接收props，是否传递给super，取决于：你是否希望在构造器中通过this访问props（其实这种情况很少）？ 如果没有这个需求，则不需要constructor，在开发环境中，基本不用。
                 //console.log(props)
                 super(props)
                 console.log('constructor', this.props)
