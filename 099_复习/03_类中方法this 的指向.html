@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script text/javascript>
+    // 个人定义的函数中的this指向window， 如果使用局部的严格模式，this指向undefined。
+    //function demo (){
+    //    'use strict'
+    //    console.log(this)
+    //}
+    //demo()
+
+    class Person{
+        constructor(name,age){
+            this.name = name
+            this.age = age
+        }
+        study(){
+            // study 方法放在了哪里？ ——类的原型对象上，供实例使用。
+            // 通过Person实例调用study时，study中的this就是Person实例。
+            console.log(this)
+        }
+    }
+    const p1 = new Person('Tom',19)
+    p1.study() // 通过实例调用study方法。
+    // 赋值语句，此处属于函数的直接调用study方法。
+    //  ***class的个人定义的方法，在局部都自主开启了严格模式，所以this无法指向window，指向undefined。
+    const x = p1.study
+    x()
+    
+    </script>
+</body>
+</html>
