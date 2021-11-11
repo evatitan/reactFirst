@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>引出生命周期</title>
+</head>
+<body><!---->
+    <!--建立一个容器-->
+    <div id="test"></div>
+
+    <!--引入react核心库-->
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <!--引入react-dom,用于支持react-->
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <!--引入babel,用于将jsx转化为js-->
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+
+
+    <script type="text/babel">
+
+        /**
+         * 【生命周期回调函数】  <=> 【生命周期钩子函数】  <=>  【生命周期函数】  <=>  【生命周期钩子】
+         * */
+
+        // 1. 创建组件
+        class Life extends React.Component{
+
+            state={opacity:1}
+            
+            death=()=>{
+                // clearInterval(this.timer) // 方法一：在组件卸载之前，清除定时器，以免组件卸载后，计时器仍然在跑，导致程序报错。
+                // 卸载 unmount 组件
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+
+            // 此方法是render同一级别的方法，通过life的实例对象进行调用的方式，所以不需要赋值语句和箭头函数来保证this的指向。
+            // componentDidMount调用时机： 组件挂载完毕时调用
+            componentDidMount(){
+                console.log("@")
+                this.timer=setInterval(() => {
+                    let {opacity}=this.state
+                    opacity -= 0.1
+                    if(opacity <= 0) opacity=1
+                    this.setState({opacity})
+                }, 200);
+            }
+
+            // 方法二：
+            // 此方法是render同一级别的方法，通过life的实例对象进行调用的方式，所以不需要赋值语句和箭头函数来保证this的指向。
+            // componentWillUnmount调用时机： 组件快要被卸载之前调用。
+            componentWillUnmount(){
+                // 在组件快要被卸载之前清除定时器，以免组件卸载后，计时器仍然在跑，导致程序报错。
+                clearInterval(this.timer)
+            }
+
+            // render调用的时机： 初次渲染、状态更新之后。
+            render(){
+                console.log("render")
+                return (
+                   <div>
+                    <h2 style={{opacity:this.state.opacity}}>React学不会怎么办？</h2>
+                    <button onClick={this.death}>不活了</button>
+                    </div> 
+                )
+            }
+        }
+
+        // 2. 渲染组件
+        ReactDOM.render(<Life/>,document.getElementById("test"))
+
+    </script>
+</body>
+</html>
