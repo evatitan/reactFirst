@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非受控组件</title>
+</head>
+<body><!---->
+    <!--建立一个容器-->
+    <div id="test"></div>
+
+    <!--引入react核心库-->
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <!--引入react-dom,用于支持react-->
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <!--引入babel,用于将jsx转化为js-->
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+
+
+    <script type="text/babel"> 
+    //【非受控组件】：页面中所有输入类的DOM，数据被现用现取，则是非受控组件。
+
+    // 1. 创建class组件
+    class Login extends React.Component{
+
+        handleSubmit =(event)=>{
+            // ajax 的方法阻止表单的提交，但是数据依旧会被后台保管。
+            event.preventDefault() 
+            const {username, password} = this
+            alert(`Your username is : ${username.value}. You password is ${password.value}`)
+        }
+
+        render(){
+            return (
+                <form action="http://www.atguigu.com" onSubmit={this.handleSubmit}>
+                   Name:<input ref={c=>{this.username=c}} type="text" name="username"/> 
+                   Possword:<input ref={c=>{this.password=c}} type="password" name="password"/>
+                   <button>Login</button>
+                </form>
+            )
+        }
+    }
+    // 2. 渲染组件
+    ReactDOM.render(<Login/>, document.getElementById('test'))
+    </script>
+</body>
+</html>

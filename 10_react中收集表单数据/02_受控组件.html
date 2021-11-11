@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02受控组件</title>
+</head>
+<body><!---->
+    <!--建立一个容器-->
+    <div id="test"></div>
+
+    <!--引入react核心库-->
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <!--引入react-dom,用于支持react-->
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <!--引入babel,用于将jsx转化为js-->
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+
+
+    <script type="text/babel"> 
+    // 【受控组件】：页面中所有输入类的DOM，随着操作者每一步输入，数据即被传递到到状态中，当需要使用的时候再进行提取，则是受控组件。
+    // 相比较【非受控组件】和【受控组件】，推荐【受控组件】，因为可以省略ref的使用。
+
+    // 1. 创建class组件
+    class Login extends React.Component{
+
+        //初始化状态，因为之后需要保存DOM输入的新数据，所以优先初始化状态，以为第二步做准备。
+        state={
+            username:'',
+            password:''
+        }
+        // 将 event获取的username节点值存储在状态中
+        saveUsername=(event)=>{
+            this.setState({username:event.target.value})
+        }
+
+        // 将 event获取的password节点值储存在状态中
+        savePassword=(event)=>{
+            this.setState({password:event.target.value})
+        }
+        
+        //保存提交的回调
+        handleSubmit =(event)=>{
+            // ajax 的方法阻止表单的提交，但是数据依旧会被后台保管。
+            event.preventDefault() 
+            const {username, password} = this.state
+            alert(`Your username is : ${username}. You password is ${password}`)
+        }
+
+        render(){
+            return (
+                // onChange方式也来自原生js，用于随时保存DOM被输入的数据。
+                <form action="http://www.atguigu.com" onSubmit={this.handleSubmit}>
+                   Name:<input onChange ={this.saveUsername} type="text" name="username"/> 
+                   Possword:<input onChange={this.savePassword} type="password" name="password"/>
+                   <button>Login</button>
+                </form>
+            )
+        }
+    }
+    // 2. 渲染组件
+    ReactDOM.render(<Login/>, document.getElementById('test'))
+    </script>
+</body>
+</html>
