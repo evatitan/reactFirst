@@ -1,9 +1,16 @@
 import React,{Component} from 'react';
+import PropTypes from 'prop-types';
 import {nanoid} from 'nanoid'
 import './index.css'
 
 export default class Header extends Component {
 
+    //对接受的props进行类型和必填性的限制
+    static propTypes = {
+        addTodo:PropTypes.func.isRequired
+    }
+    
+    //键盘事件的回调
     handleKeyUp=(event)=>{
         // 结构赋值获取keyCode，target
         const {keyCode,target} =event

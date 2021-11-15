@@ -5,7 +5,8 @@ import Footer from './components/Footer';
 import './App.css'
 
 export default class App extends Component {
-
+	
+    // 状态在哪里-操作状态的方法就在哪里
 	state={todos:[
 		{id:'001',name:"吃饭",done:true},
 		{id:'002',name:"睡觉",done:true},
@@ -23,13 +24,27 @@ export default class App extends Component {
 		this.setState({todos:newTodos})
 	}
 
+	//updateTodo用于更新一个todo对象
+	updateTodo=(id,done)=>{
+        //获取状态中的todos
+	    const {todos}=this.state
+	    //匹配处理数据
+	    const newTodos = todos.map((todoObj)=>{
+	    	if(todoObj.id === id) return {...todoObj,done:done}
+	    	else return todoObj
+	    })
+	    //更新数据
+	    this.setState({todos:newTodos})
+	}
+
+
 	render() {
 		const {todos} = this.state
 		return (
 			<div className="todo-container">
 			<div className="todo-wrap">
 				<Header addTodo={this.addTodo}/>
-				<List todos={todos} /> {/**父组件【App】给子组件【List】传递数据 */}
+				<List todos={todos} updateTodo={this.updateTodo}/> {/**父组件【App】给子组件【List】传递数据 */}
 				<Footer/>
 			</div>
 		  </div>
