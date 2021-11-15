@@ -4,13 +4,6 @@ import './index.css'
 
 export default class Item extends Component {
 
-  //，需要引入prop-types库，对接受的props进行类型和必要性的限制
-  static propTypes={
-    todos:PropTypes.array.isRequired,
-    updateTodo:PropTypes.func.isRequired,
-    deleteTodo:PropTypes.func.isRequired
-  }
-
   // 标识鼠标的移入和移出
   state={mouse:false} 
 
@@ -43,7 +36,7 @@ export default class Item extends Component {
         return (
             <li style={{backgroundColor:mouse ? '#ddd' : 'white'}} onMouseEnter={this.handleMouse(true)} onMouseLeave={this.handleMouse(false)}>
             <label>
-              <input type="checkbox" defaultChecked={done} onChange={this.handleCheck(id)}/>
+              <input type="checkbox" checked={done} onChange={this.handleCheck(id)}/>
               <span>{name}</span>
             </label>
             <button onClick={()=>{this.handleDelete(id)}} className="btn btn-danger" style={{display:mouse? 'block':'none'}}>删除</button>
