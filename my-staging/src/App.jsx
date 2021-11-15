@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import './App.css'
 
 export default class App extends Component {
-	
+
     // 状态在哪里-操作状态的方法就在哪里
 	state={todos:[
 		{id:'001',name:"吃饭",done:true},
@@ -37,6 +37,18 @@ export default class App extends Component {
 	    this.setState({todos:newTodos})
 	}
 
+	//删除一个todo的回调
+	deleteTodo=(id)=>{
+		//获取原来的todo
+		const {todos}=this.state
+		//删除指定id的todo对象
+		const newTodos = todos.filter((todoObj)=>{
+			return todoObj.id !== id
+		})
+		//更新状态
+		this.setState({todos:newTodos})
+	}
+
 
 	render() {
 		const {todos} = this.state
@@ -44,7 +56,7 @@ export default class App extends Component {
 			<div className="todo-container">
 			<div className="todo-wrap">
 				<Header addTodo={this.addTodo}/>
-				<List todos={todos} updateTodo={this.updateTodo}/> {/**父组件【App】给子组件【List】传递数据 */}
+				<List todos={todos} updateTodo={this.updateTodo} deleteTodo={this.deleteTodo}/> {/**父组件【App】给子组件【List】传递数据 */}
 				<Footer/>
 			</div>
 		  </div>
