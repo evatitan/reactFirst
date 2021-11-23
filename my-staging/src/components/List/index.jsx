@@ -10,9 +10,9 @@ export default class List extends Component{
         return (
             <div className="row">
               {
-                isFirst ? <h2>Welcome to the page</h2> : 
-                isLoading ? <h2>Loading...</h2> :
-                err ? <h2 style={{color:'red'}}>{err}</h2> :
+                isFirst? <h2>Welcome to the page</h2> :
+                isLoading? <h2>Loading</h2>:
+                err? <h2 style={{color:'red'}}>{err}</h2>: 
 
                 users.map((userObj)=>{
                   return (

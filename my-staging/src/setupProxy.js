@@ -17,3 +17,15 @@ module.exports = function(app) {
 		})
 	);
 };
+
+// const proxy = require('http-constproxy-middleware');
+
+// module.export = function(app) {
+// 	app.use(
+// 		proxy('/api1', {
+// 			target: 'http://localhost:5000',
+// 			changeOrigin: true,
+// 			pathRewrite: { '^/api': '' }
+// 		})
+// 	);
+// };
