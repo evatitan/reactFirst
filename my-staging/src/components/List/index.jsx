@@ -1,26 +1,31 @@
-import React,{Component} from 'react';
-import PropTypes from 'prop-types'
-import Item from '../Item';
+import React,{Component} from "react";
 import './index.css'
 
-export default class List extends Component {
-  //，需要引入prop-types库，对接受的props进行类型和必要性的限制
-  static propTypes={
-    todos:PropTypes.array.isRequired,
-    updateTodo:PropTypes.func.isRequired,
-    deleteTodo:PropTypes.func.isRequired
-  }
+export default class List extends Component{
 
-    render() {
-        const {todos,updateTodo,deleteTodo} = this.props
+    render(){
+
+      const {users,isFirst,isLoading,err} = this.props
+
         return (
-            <ul className="todo-main">
-                {
-                    todos.map((todo,)=>{
-                        return <Item key={todo.id} {...todo} updateTodo={updateTodo} deleteTodo={deleteTodo}/>
-                    })
-                }
-          </ul>
+            <div className="row">
+              {
+                isFirst ? <h2>Welcome to the page</h2> : 
+                isLoading ? <h2>Loading...</h2> :
+                err ? <h2 style={{color:'red'}}>{err}</h2> :
+
+                users.map((userObj)=>{
+                  return (
+                    <div key={userObj.id} className="card">
+                      <a rel="noreferrer" href={userObj.html_url} target="_blank" >
+                        <img alt="avatar" src={userObj.avatar_url} style={{width: '100px'}}/>
+                      </a>
+                      <p className="card-text">{userObj.login}</p>
+                    </div>
+                  )
+                })
+              }
+            </div>
         )
     }
 }
