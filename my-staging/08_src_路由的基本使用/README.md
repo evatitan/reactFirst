@@ -1,3 +1,7 @@
+### 第一章：React入门
+### 第二章：React面向组件编程
+
+### 第三章：React应用，基于脚手架
 ## todoList 案例相关知识点
 1. 拆分组件，实现静态组件，注意：className，style的写法。
 2. 动态化初始列表，如何确定将数据放在哪个组件的state中。
@@ -9,31 +13,26 @@
 4. 注意defaultChecked 和 checked 的区别，类似的还有： defaultValue 和 Value
 5. 状态在哪里，操作状态的方法就在那里。
 
-
+### 第四章：React ajax
 ## axio 发送请求
 1. 代理的设置
 2. axios.get(url).then(response=>{},error=>{})
 
-
 ## 消息订阅——消息发布 （兄弟组件的沟通）
 
 1. 学习链接：https://github.com/mroderick/PubSubJS
-
 2. 消息订阅：
  . this.token = PubSub.subscribe('myTopic',()=>{}) 
  . 保持myTopic一致。
  . 从其他组件获取相关消息。
- . 回调函数中可以对所获得的数据进行操作。
- . 
+ . 回调函数中可以对所获得的数据进行操作。 
 3. 消息发布：
  . PubSub.publish('myTopic',{data})
  . 保持myTopic一致。
  . 将data数据传给订阅者。
-
 4. 取消订阅（如果相关组件被删除或者其他原因不在，需要取消订阅）
  . PubSub.unsubscribe(this.token), 此处要求给当初的订阅机制取名“this.token”
  . componentWillUnmount中设置
-
 
 ## fetch 发送请求
 1. 几种发送请求的方式
@@ -47,7 +46,6 @@
    . Promise风格，避免回调地狱。
    . 可以使用async，await函数。
    . fetch在老版本兼容性不是很好。
-
 
 ## github搜索案例总结
 1. 设计状态时要考虑全面，例如带有网络请求的组件，要考虑请求失败怎么办？
@@ -69,3 +67,35 @@
         console.log(error)
         PubSub.publish('search',{isLoading:false,err:error.message})
       }
+
+### 第五章：React Router 【v 74-78】
+## SPA （single page application） —— 单页面多组件
+1. 单页web应用，点击页面中的链接不会刷新页面，只会做页面的局部更新。
+2. 数据都需要通过ajax请求获取，并在前端异步展现。
+## 路由
+1. 一个路由就是一个映射关系（key：Value）
+2. key 为路径， value可能是function 或 component
+3. 路由分类：
+   —— 后端路由：
+      . 理解：Value 是function，同来处理客户端提交的请求。
+      . 注册路由： router.get(path,function(req,res))。
+      . 工作过程： 当node接收到一个请求时，根据请求路径找到匹配的路由，调用路由中的函数来处理请求，返回响应数据。
+   —— 前端路由：
+      . 浏览器端路由：Value时component，用于展示页面内容。
+      . 注册路由：< Router path="/test",component = {Test}>。
+      . 工作过程；当浏览器path变为/test时，当前路由组件会变成 Test组件。
+   —— 前端路由工作原理:
+      . BOM history —— 前端路由的基石，见【全家桶中06其他】中的案例。
+      . 方法一，直接使用H5推出的history身上的API
+      . 方法二，hash值（类似锚点）
+## React-router-dom 的理解   【v 77】 【需要自行下载】  
+1. react的一个插件库  /  专门用来实现一个SPA应用  /  基于react的项目基本都会使用 
+2. react-router库有三个版本： 【web***】 / 【native】  / 【any】
+3. router  路由器  /  route  路由
+
+## 路由的基本使用
+1. 下载react-router-dom库，并且引入
+2. 明确好界面中的导航区，展示区
+3. 导航区的 a 标签改为 Link 标签 ———— <Link to= “/xxx”>Demo</Link>
+4. 展示区写 Router 标签进行路径的匹配  ———— <Router path=“/xxx” element={<Demo/>}>
+5. <App> 的最外侧包裹了一个 <BrowserRouter> 或者 <HashRouter>
