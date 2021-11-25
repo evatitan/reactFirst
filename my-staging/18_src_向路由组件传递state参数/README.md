@@ -169,12 +169,11 @@
 1. 注册子路由时，要写上父路由的path值。
 2. 路由的匹配先从App总组件注册的路由开始优先匹配。
 
-## 十一、 向路由组件传递参数 , 使用频率依据以下顺序 ，都必须掌握。
+## 十一、 向路由组件传递 params 参数
 1. params 参数
    . 路由链接（携带参数）：<Link to={`/demo/test/tom/18`}>详情</Link>
    . 注册路由（声明接受）：<Route path='/demo/test/:name/:age' component={Test}/>
    . 路由组件接受参数： const {name, age} = this.props.match.params
-
 2. search 参数
    . 路由链接（携带参数）：<Link to={`/demo/test?name=tome&age=18`}>详情</Link>
    . 注册路由（无需声明，正常注册路由即可）：<Route path='/demo/test' component={Test}/>
