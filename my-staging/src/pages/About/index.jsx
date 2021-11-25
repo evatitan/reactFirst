@@ -2,9 +2,9 @@ import React,{Component} from "react";
 
 export default class About extends Component{
     render(){
-        console.log('About收到的是', this.props)
+        //console.log('About component receive', this.props)
         return (
-            <h3>我是About的内容</h3>
+            <h3>I am About component</h3>
         )
     }
 }

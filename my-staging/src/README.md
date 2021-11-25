@@ -131,3 +131,12 @@
 ## 细节——导航栏的高亮效果
 1. NavLink 自带一个默认的active样式（高亮），负责给被点击的dom一个active的样式。
 2. 如果想自定义导航栏的样式，需要在NavLink中通过 activeClassName = “style”，然后在css文件中可以另行设置。
+3. 如果产品中也引用了bootstrap，则需要将自定义的样式级别加强  ！important
+
+
+
+## MyNavLink 进行封装
+1. 标签名作为标签体【位于标签之间的内容】，标签不为自闭合标签，为完整的标签。
+2. 标签属性的数据使用props传送和接受。 但是，如何接受 【标签体数据】？  
+3. App中的MyNavLink导航：<MyNavLink to="/about"> About </MyNavLink> ——标签体【About】其实也是一个特殊的标签属性， key为childern
+4. MyNavLink组件的封装：<NavLink className="list-group-item" {...this.props}/>  ——批量传递所有的props到封装组件，
