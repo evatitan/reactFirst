@@ -138,7 +138,3 @@
 2. 标签属性的数据使用props传送和接受。 但是，如何接受 【标签体数据】？  
 3. App中的MyNavLink导航：<MyNavLink to="/about"> About </MyNavLink> ——标签体【About】其实也是一个特殊的标签属性， this.props.children可以获取组件标签体内容。
 4. MyNavLink组件的封装：<NavLink className="list-group-item" {...this.props}/>  ——批量传递所有的props到封装组件，
-
-# Switch
-1. 通常情况下，path和component是一一对应的关系。
-2. 引入Switch，并用此标签将所有注册路由进行包裹。Switch 可以提高路由匹配效率（单一匹配）
