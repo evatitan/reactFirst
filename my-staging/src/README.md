@@ -164,3 +164,7 @@
                      <Route path ="/home" component={Home}/> 
                      <Redirect to="/about"/>
                   </Switch> 
+
+## 嵌套路由 = 多级路由
+1. 注册子路由时，要写上父路由的path值。
+2. 路由的匹配先从App总组件注册的路由开始优先匹配。

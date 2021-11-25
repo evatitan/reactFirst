@@ -19,8 +19,8 @@ export default class App extends Component{
               <div className="col-xs-2 col-xs-offset-2">
                 <div className="list-group">
                     {/* 标签体【About】其实也是一个特殊的标签属性， this.props.children可以获取组件标签体内容。*/}
-                    <MyNavLink to="/about"> About</MyNavLink> 
-                    <MyNavLink to="/home"> Home</MyNavLink>
+                    <MyNavLink to="/about"> About </MyNavLink> 
+                    <MyNavLink to="/home"> Home </MyNavLink>
                 </div>
               </div>
               <div className="col-xs-6">
