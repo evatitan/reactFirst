@@ -125,7 +125,7 @@
          match:
                params: {}
                path:"/about"
-         url:"/about"
+               url:"/about"
 
 
 ## 细节——导航栏的高亮效果
@@ -153,7 +153,18 @@
 
 ## 模糊匹配 和 精准匹配
 1. 模糊匹配：默认使用的是模糊匹配（简单记：【输入的路径】必须包含要【匹配的路径】，且顺序要一致）
-2. 精准匹配：<Route exact={true} path ="/home" component={Home}/> 或者 exact，默认属性是true。
+2. 精准匹配：<Route exact={true} path ="/home" component={Home}/> 或者 exact，默认属性是true。exact 不需要引入，可直接使用。
 3. 使用原则：不要随便开启，需要在开，有时候开启会导致无法继续匹配二级路由。
 
 ## Redirect
+1. Redirect： 重定向，如果前面都没有匹配上，最后去Redirect指定的路径。
+2. 需要在 react-router-dom 中引入，且放在Switch标签的内部最下方，也就是所有路由注册的最下方。
+                  <Switch> 
+                     <Route path ="/about" component={About}/>
+                     <Route path ="/home" component={Home}/> 
+                     <Redirect to="/about"/>
+                  </Switch> 
+
+## 嵌套路由 = 多级路由
+1. 注册子路由时，要写上父路由的path值。
+2. 路由的匹配先从App总组件注册的路由开始优先匹配。

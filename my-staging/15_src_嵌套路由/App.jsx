@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import {Route,Switch} from 'react-router-dom';  // Switch 用于程序在注册路由板块，对路径进行匹配后则不再继续进行匹配。
+import {Route,Switch,Redirect} from 'react-router-dom';  // Switch 用于程序在注册路由板块，对路径进行匹配后则不再继续进行匹配。
 
 import Header from "./components/Header";    // 一般组件
 import MyNavLink from "./components/MyNavLink"; 
@@ -19,17 +19,18 @@ export default class App extends Component{
               <div className="col-xs-2 col-xs-offset-2">
                 <div className="list-group">
                     {/* 标签体【About】其实也是一个特殊的标签属性， this.props.children可以获取组件标签体内容。*/}
-                    <MyNavLink to="/about"> About</MyNavLink> 
-                    <MyNavLink to="/home"> Home</MyNavLink>
-
+                    <MyNavLink to="/about"> About </MyNavLink> 
+                    <MyNavLink to="/home"> Home </MyNavLink>
                 </div>
               </div>
               <div className="col-xs-6">
                 <div className="panel">
                   <div className="panel-body">
                     <Switch> 
-                      <Route exact path ="/about" component={About}/>
-                      <Route exact={true} path ="/home" component={Home}/> 
+                      <Route path ="/about" component={About}/>
+                      <Route path ="/home" component={Home}/> 
+                      {/* Redirect 重定向，如果以上都没有匹配上，最后去redirect指定的路径 */}
+                      <Redirect to="/about"/>
                     </Switch> 
                   </div>
                 </div>
