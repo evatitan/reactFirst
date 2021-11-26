@@ -74,7 +74,7 @@
             add=()=>{
                 const {persons} = this.state
                 const p = {id:persons.length+1, name:"Dani", age:20}
-                this.setState({persons:[p,...persons]})
+                this.setState({persons:[...persons,p]})
             }
 
             render(){
