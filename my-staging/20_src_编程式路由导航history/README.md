@@ -13,12 +13,13 @@
 4. 注意defaultChecked 和 checked 的区别，类似的还有： defaultValue 和 Value
 5. 状态在哪里，操作状态的方法就在那里。
 
-
-## 第四章：React ajax
+### 第四章：React ajax
 ## axio 发送请求
 1. 代理的设置
 2. axios.get(url).then(response=>{},error=>{})
+
 ## 消息订阅——消息发布 （兄弟组件的沟通）
+
 1. 学习链接：https://github.com/mroderick/PubSubJS
 2. 消息订阅：
  . this.token = PubSub.subscribe('myTopic',()=>{}) 
@@ -32,6 +33,7 @@
 4. 取消订阅（如果相关组件被删除或者其他原因不在，需要取消订阅）
  . PubSub.unsubscribe(this.token), 此处要求给当初的订阅机制取名“this.token”
  . componentWillUnmount中设置
+
 ## fetch 发送请求
 1. 几种发送请求的方式
  . xhr（传统AJAX） ： window自带，但是封装设置较为繁琐，没有那么好用的api，也有回调地狱。
@@ -44,6 +46,7 @@
    . Promise风格，避免回调地狱。
    . 可以使用async，await函数。
    . fetch在老版本兼容性不是很好。
+
 ## github搜索案例总结
 1. 设计状态时要考虑全面，例如带有网络请求的组件，要考虑请求失败怎么办？
 2. ES6小知识：解构赋值 + 重命名
@@ -65,7 +68,7 @@
         PubSub.publish('search',{isLoading:false,err:error.message})
       }
 
-## 第五章：React Router 【v 74-78】
+### 第五章：React Router 【v 74-78】
 ## SPA （single page application） —— 单页面多组件
 1. 单页web应用，点击页面中的链接不会刷新页面，只会做页面的局部更新。
 2. 数据都需要通过ajax请求获取，并在前端异步展现。
@@ -191,48 +194,11 @@
    . 备注： 刷新也保留参数。
    . 注意：提供 || {} 防止网页的历史记录被清除后（因为location是history上面的一个api），网页不报错误，而是返回空对象。
 
-## 十二、 编程式路由导航 也就是 history 身上的 API
+4. 编程式路由导航 也就是 history 身上的 API
    . this.props.history.push() —— react默认开启push模式，简称压栈，就是新的历史记录压在最上面。
    . this.props.history.replace() ——是替代。也可以直接加在 LINK 中，replace={true}  或者  replace， 无需引入且写法和 exact 类似。
    . this.props.history.goBack() : 往后退一步
    . this.props.history.goorward() ： 往前进一步
    . this.props.history.go(n): n 为正几，则是前进几步历史记录， 为负，则是往后退几步历史记录。
 
-2.  withRouter 【从react-router-dom中引入withRouter】
-   . withRouter可以加工一个一般组件，使一般组件具备路由组件所特有的API
-   . withRouter的返回值是一个新组件， export default withRouter(Header)
 
-## 十三、BrowserRouter 和 HashRouter
-1. 底层原理不同：
-   . BrowserRouter: 使用的是 H5 的history API， 不兼容 IE9 及以下版本。 
-   . HashRouter: 使用的是URL的哈希值。
-2. path表现不同：
-   . BrowserRouter 的路径中没有带 # ，例如： localhost：3000/demo/test
-   . HashRouter 的路径中带 # ，例如： localhost：3000/#/demo/test
-3. 刷新后对路由state参数的影响：
-   . BrowserRouter 没有任何影响，因为state保存在history对象中。
-   . HashRouter 刷新后会导致路由state参数的丢失 ！！！！
-4. 备注：HashRouter 可以用于解决一些路径错误相关的问题，比如刷新后样式的丢失。
-
-
-### 第六章 REACT UI 组件库
-
-## 十四、 REACT UI 组件库  【V 94-96】 
-1. material-ui ： 
-2. ant-design（蚂蚁金服）
-3. antd的高级配置【按需引入】，参考文件为antd的V3版本.
-  . https://3x.ant.design/docs/react/use-with-create-react-app-cn
-  . eject命令 暴露react的所有webpackage 
-  . 最后把之前自己引入的完整样式删除！！！
-4. antd的主题设置
-  . https://3x.ant.design/docs/react/use-with-create-react-app-cn
-  . 注意下载的npm包裹的版本，版本容易导致问题。
-
-### 第七章 redux ———— 状态交互 和 状态管理  【V 97 - 126】
-1. 专门做状态管理的 JS 库 （不是react插件库） 
-2. 可以与react，angular，vue 等项目中，但基本与热阿词条配合使用居多。
-3. 作用： 集中式管理react应用中多个组件【共享】的状态。
-4. 使用情况：
-   . 某个组件的状态，需要让其他组件可以随时拿到（共享）。
-   . 一个组件需要改变另一个组件的状态（通信）。比如 B 组件通过 redux 收到 A 组件的状态，继而保管为自己的状态， A 就改变了 B 的状态。 
-   . 总体原则，能不用旧不用，如果不用导致编程吃力则用。

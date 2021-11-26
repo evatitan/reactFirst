@@ -1,4 +1,5 @@
 ### 第一章：React入门
+
 ### 第二章：React面向组件编程
 
 ### 第三章：React应用，基于脚手架
@@ -147,6 +148,6 @@
 1. 描述： 当在路径前加上公司名称，之后再次刷新网页，因为样式引入的路径的方式有多级结构问题，会导致网页样式丢失，只返回index.html。
 2. 分析： 在react中，内置一个devServer【localhost：3000】，且根目录在public中。当在请求一些不存在的数据或资源时，react会返回根目录中的index.html，这样就导致网页只渲染这份文件。
 3. 解决方案：
-   . 修改index.html文件中的css引入路径，去掉css前面的【.】将相对路径改为绝对路径： <link rel="stylesheet" href="./css/bootstrap.css"> —— <link rel="stylesheet" href="/css/bootstrap.css">
+   . 修改index.html文件中的css引入路径，去掉/css前面的【.】将相对路径改为绝对路径： <link rel="stylesheet" href="/css/bootstrap.css">
    . 将css路径中的【.】替换为【%PUBLIC_URL%】 ： <link rel="stylesheet" href="%PUBLIC_URL%/css/bootstrap.css"> 【此方法只使用react，其他框架不行】
    . 在index.js文件中，将BrowserRouter路由器改为HashRouter，因为会忽略 # 之后的路径内容，直接询问根目录public请求数据资源，这样可以正常获取。【此方法不常用】
