@@ -1,5 +1,5 @@
 ## V 100 ——求和案例redux精简版（自写笔记）
-# 去除Count组件自身的状态
+## 去除Count组件自身的状态
 1. 下载redux库，创建redux文件夹，建立store和count_redux（为Count组件服务）文件且对外暴露。
    . store来自于redux库，需要引入 ———— import {createStore} from "redux"。
    . countReducer是纯函数且为store服务 ———— import countReducer from "count_redux.js"。
@@ -43,3 +43,31 @@
 1. 新增文件：
          - count_action.js  专门用于创建action对象
          - constant.js      放置由于编码疏忽写错的action中的type。
+
+## V 102 ——求和案例redux的异步 action 版 （视频笔记）
+1. 同步action：action的值是一个OBJ{}
+2. 异步action : action的值是一个function(){}
+3. 明确： 延迟的动作不想交给组件自身，交给action。
+4. 何时需要异步action： 想要对状态进行操作，但是具体的数据靠异步任务返回。
+5. 具体编码： 
+          . npm i redux-thunk ，并配置在store中。
+          . 创建action的函数不再返回一般对象，而是一个函数，该函数中写异步任务。
+          . 异步任务有结果后，分发一个同步action区真正操作数据。
+6. 备注： 异步action不是必须要写的，完全可以自己等待异步任务的结果后在区分发同步action。 
+
+## V 103 ——求和案例react-redux的基本使用 （自写笔记） ： react-redux 库是来自官方库，之前使用的是redux库 【有图】
+1. react-redux 将所有的组件分为两类：【容器组件】【UI组件】，所有的【UI组件】都应该被包裹在【容器组件】中，父子关系交流借助 props。
+2. 【容器组件】和redux交流(在App组件中通过传递props的方式，而不是组件中自己引入)，可以随意使用redux的 API， 【UI组件】不可以使用。 
+3. 【容器组件】会给【UI组件】传递： 1). redux中所保存的状态。 2). 用于操作状态的方法 —— store.dispatch(action)
+4. 备注: 【容器组件】给【UI组件】传递：共享状态，操作状态的方法，均通过props传递。
+
+## V 103 ——求和案例react-redux的基本使用 （视频笔记） 
+1. 明确两个概念
+   .UI组件：
+   .容器组件：
+2. 如何创建一个容器组件 —— 靠react-redux的connect函数
+   connect(mapStateToProps,mapDispatchToProps)(UI组件)
+   - mapStateToProps: 映射状态，返回值时一个对象。
+   - mapDispatchToProps: 映射操作状态的方法，返回值时一个对象。
+3. 备注1：容器组件中的store时靠props传进去的，而不是在容器组件中直接引入。
+   备注2：mapDispatchToProps，也可以是一个对象。

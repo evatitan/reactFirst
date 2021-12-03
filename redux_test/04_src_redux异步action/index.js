@@ -5,8 +5,7 @@ import store from './redux/store';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-// 引入 store 监测 redux 中状态的改变，如redux的状态发生改变，则重新渲染父组件，引起子组件也重新渲染获得最新数据。
-// 优点：1.不用子组件单独监测。   2. Diffing 算法不会有太多工作量。
+// 引入store， 如果状态有所改变，在本文件中直接对整个APP组件进行监听+调用render。 不必在子组件中进行监听，且diffing算法，不会导致工作量巨大。
 store.subscribe(() => {
 	ReactDOM.render(<App />, document.getElementById('root'));
 });

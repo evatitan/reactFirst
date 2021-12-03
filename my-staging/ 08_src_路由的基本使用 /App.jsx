@@ -29,11 +29,11 @@ export default class App extends Component{
                 <div className="panel">
                     <div className="panel-body">
                     {/* 引入 Route ,写入 2 个参数 --------- 注册路由 */}
-                    <Routes>
+                    
                        {/* 旧写法: <Route path ="/about" component ={About}/> */}
                         <Route path ="/about" element ={<About/>}/>
                         <Route path ="/home" element ={<Home/>}/> 
-                    </Routes>
+                    
                     </div>
                 </div>
               </div>
