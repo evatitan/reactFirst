@@ -8,8 +8,11 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import countReducer from './reducers/count';
 import personReducer from './reducers/person';
 
-//引入redux-thunk，用于支持异步action，分别暴露和统一暴露需要{thunk},如果是默认暴露，那就直接写thunk
+// 引入redux-thunk，用于支持异步action，分别暴露和统一暴露需要{thunk},如果是默认暴露，那就直接写thunk
 import thunk from 'redux-thunk';
+
+// 引入react-redux开发者工具
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 // combineReducecrs函数被调用的时候所传入的对象，就是后面redux所存储的总对象。
 // 汇总reducer，形成一个总的reducers
@@ -19,6 +22,6 @@ const allReducer = combineReducers({
 });
 
 // applyMiddleware是一个函数，在这里需要做第二个参数，且需要传入thunk。
-const store = createStore(allReducer, applyMiddleware(thunk));
+const store = createStore(allReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 export default store;

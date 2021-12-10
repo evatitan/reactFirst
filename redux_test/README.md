@@ -104,12 +104,25 @@
    . 在UI组件中通过this.props.xxxx读取和操作状态。
 
 
-## V 109 ——数据共享（视频笔记）
-1. 
+## V 109-112 ——  求和案例react-redux数据共享（视频笔记）
+1. 定义一个Person组件，和Count组件通过redux共享数据。
+2. 为Person组件编写：reducer，action，配置constant常量。
+3. 重点： Person的reducer和Count的Reducer要使用combineReducer进行合并。合并后的总状态是一个对象！！！
+4. 交给store的是总erducer，最后注意在组件中取出状态的时候，记得“取到位”。
+5. 【纯函数】--
+   . 一类特别的函数，只要是同样的输入（实参），必定得到同样的输出（返回）
+   .必须遵守以下一些约束
+     . 不得改写参数数据
+     . 不会产生任何副作用，例如网络请求，输入和输出设备。
+     . 不能调用Date.now() 或 Math.random()等不纯方法。
+   . redux中的reducer【必须---纯函数】
 
 
-
-
+## V 113 —— react-redux 开发者工具的使用
+1. npm i redux-devtool-extension
+2. store中进行配置：
+ import { composeWithDevTools } from 'redux-devtools-extension';
+ const store = createStore(allReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 
 
