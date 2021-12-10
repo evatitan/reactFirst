@@ -61,7 +61,7 @@
 3. 【容器组件】会给【UI组件】传递： 1). redux中所保存的状态。 2). 用于操作状态的方法 —— store.dispatch(action)
 4. 备注: 【容器组件】给【UI组件】传递：共享状态，操作状态的方法，均通过props传递。
 
-## V 103 ——求和案例react-redux的基本使用 （视频笔记） 
+## V 103-6 ——求和案例react-redux的基本使用 （视频笔记————需要多练习，是难点） 
 1. 明确两个概念
    .UI组件：
    .容器组件：
@@ -70,4 +70,59 @@
    - mapStateToProps: 映射状态，返回值时一个对象。
    - mapDispatchToProps: 映射操作状态的方法，返回值时一个对象。
 3. 备注1：容器组件中的store时靠props传进去的，而不是在容器组件中直接引入。
-   备注2：mapDispatchToProps，也可以是一个对象。
+   备注2：mapDispatchToProps，可以是一个函数（一般写法），也可以是一个对象（API层级的优化写法）。
+
+## V 107-8 ——react-redux的优化写法 (自学笔记)
+1. 使用react-redux的优点一： 使用connectconnect()()函数建立的容器组件，可以成为UI组件和redux的桥梁。  mapStateToProps(),mapDispatchToProps() API层级的优化写法。
+2. 使用react-redux的优点二： 容器组件由connect()()创建，它不需要在index.js中对父组件进行随时监听，可以直接去除。但是redux则是需要进行单独监听。
+   // 引入store， 如果状态有所改变，在本文件中直接对整个APP组件进行监听+调用render。 不必在子组件中进行监听，且diffing算法，不会导致工作量巨大。
+   // store.subscribe(() => {
+   // 	ReactDOM.render(<App />, document.getElementById('root'));
+   // });
+3. 使用react-redux的优点三： 在index.js文件中，引入react-redux中的Provider方法，之间将store={store}快捷的传递给所有的容器组件，避免手动逐一传递。
+      ReactDOM.render(
+	      <Provider store={store}>
+	      	<App />
+	      </Provider>,
+	      document.getElementById('root')
+      );
+
+4. 文件层面优化： 将容器组件和UI组件定义在一个文件中，整合在container中的容器组件中。
+
+## V 108 ——react-redux的优化写法 （视频笔记）
+1. 容器组件和UI组件的整合
+2. 无需自己给容器组件传递store， 使用Provider统一传递。
+3. 使用react-redux后不需要自己检测redux中的状态改变了，容器组件可以自动完成这个工作。
+4. mapDispatchToProps也可以简单的写成一个对象。
+5. 一个组件要和redux“打交道”要经过那几步？
+   . 定义好一个UI组件  --- 不暴露
+   . 引入connect()()生成一个容器组件，并暴露，写法如下：
+      connect(
+         state=>({key:value})    // 映射状态
+         {key:xxxAction}         // 映射操作状态的方法
+      )(UI组件)
+   . 在UI组件中通过this.props.xxxx读取和操作状态。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
