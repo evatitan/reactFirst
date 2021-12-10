@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createDecrementAction, createIncrementAction, createIncrementAsyncAction } from '../../redux/count_action';
+import { createDecrementAction, createIncrementAction, createIncrementAsyncAction } from '../../redux//actions/count';
 class Count extends React.Component {
 	handleAdd = () => {
 		this.props.add(1);
@@ -19,7 +19,8 @@ class Count extends React.Component {
 	render() {
 		return (
 			<div>
-				<h2>Sum is : {this.props.sum}</h2>
+				<h2>Count Component, , there are {this.props.persons} person</h2>
+				<h4>Sum is : {this.props.sum}</h4>
 				<button onClick={this.handleAdd}>+1</button>
 				<button onClick={this.handleReste}>-1</button>
 				<button onClick={this.handleAddOdd}>Odd +1</button>
@@ -31,7 +32,10 @@ class Count extends React.Component {
 
 export default connect(
 	//
-	(state) => ({ sum: state }),
+	(state) => ({
+		sum: state.sum,
+		persons: state.persons.length
+	}),
 	{
 		add: createIncrementAction,
 		reset: createDecrementAction,
