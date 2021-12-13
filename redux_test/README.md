@@ -118,12 +118,20 @@
    . redux中的reducer【必须---纯函数】
 
 
-## V 113 —— react-redux 开发者工具的使用
+## V 113 —— react-redux 开发者工具的使用(火狐浏览器需要点击鼠标右键，谷歌浏览器则定在菜单栏中)
 1. npm i redux-devtool-extension
 2. store中进行配置：
- import { composeWithDevTools } from 'redux-devtools-extension';
- const store = createStore(allReducer, composeWithDevTools(applyMiddleware(thunk)));
+      import { composeWithDevTools } from 'redux-devtools-extension';
+      const store = createStore(allReducer, composeWithDevTools(applyMiddleware(thunk)));
 
+## V 114 —— 求和案例 react-redux 最终版
+1. 所有变量的名字要规范，尽量触发对象的简写形式。
+2. reducers文件中，编写index.js 专门用于汇总并暴露所有的reducer。
+
+## V 115 —— 打包一个项目，此方法用于前端人员进行测试
+1. npm run build  // 将所有的编码编译为纯js
+2. npm install -g serve  // 下载serve包
+3. serve -s build  // 以build文件为根目录进行发布环境的运行
 
 
 
