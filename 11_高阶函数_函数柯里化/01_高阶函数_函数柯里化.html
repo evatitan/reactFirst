@@ -33,9 +33,9 @@
                 password:''
             }
             /**【函数的柯里化】
-             * input的中的onChange的右边，函数saveFormData（高阶函数）被赋值一个参数，但是并为将这个参数直接赋值给onchange，
-             * 而是利用这个参数再次返回了一个函数（return），最后将这个内部函数赋值给onchange进行回调。
-             * 注意：onchange最后必须被赋值一个函数，继而react进行调用。
+             * input的中的onChange的右边，函数saveFormData（高阶函数）被赋值一个参数，但是并没有将这个参数直接赋值给onChange，
+             * 而是利用这个参数再次返回了一个函数（return），最后将这个内部函数赋值给onChange进行回调。
+             * 注意：onChange最后必须被赋值一个函数，继而react进行调用。
              * [dataType]这里是一个关于对象的小知识(06)
              * */ 
             saveFormData=(dataType)=>{

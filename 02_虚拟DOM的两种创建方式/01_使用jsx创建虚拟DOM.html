@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello React</title>
 </head>
-<body><!---->
+<body>
     <!--建立一个容器-->
     <div id="test"></div>
 
@@ -18,7 +18,7 @@
     <script type="text/javascript" src="../dependent/babel.min.js"></script>
 
 
-    <script type="text/babel">  // 此处一定要挟babel。
+    <script type="text/babel">  // 此处一定声明需要babel来处理编译。
         // 1.创建虚拟DOM 
         const VDOM = <h1 id="title"><span> Hello, React</span></h1> // 此处一定不加引号，因为不是字符串。
         // 2. 渲染虚拟DOM到页面

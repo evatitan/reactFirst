@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello React</title>
 </head>
-<body><!---->
+<body>
     <!--建立一个“容器”-->
     <div id="test"></div>
 
@@ -15,9 +15,7 @@
     <!--引入react-dom,用于支持react-->
     <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
 
-
-
-    <script type="text/javascript">  // 此处一定要挟babel。
+    <script type="text/javascript"> 
         // 1.创建虚拟DOM 
         const VDOM = React.createElement("h1",{id:'title'},"Hello React")
         // 2. 渲染虚拟DOM到页面
