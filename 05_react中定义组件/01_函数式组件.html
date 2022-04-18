@@ -20,12 +20,12 @@
 
     <script type="text/babel"> 
     // 1. 创建函数式组件，首字母必须大写
-    function MyComponent(){
-        console.log(this) // 此处的this是undefined， 因为babel编译后，开启“use strict”模式，禁止个人定义的函数中的this指向全局windom。
-        return <h2>我是用函数定义的组件（适用于【简单组件】的定义）</h2>  // 函数必须有返回值
-    } 
+    function MyDemo(){
+        console.log(this)
+        return ( <h1>This is a function component, used for simple component</h1> )
+    }
     // 2. 渲染组件到页面
-    ReactDOM.render(<MyComponent/>,document.getElementById("test"))
+    ReactDOM.render(<MyDemo/>,document.getElementById("test"))
     /**
      * ReactDOM.render 执行后发生什么？
      * 1. React解释组件标签，找到了MyComponent组件。

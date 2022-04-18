@@ -20,18 +20,15 @@
 
     <script type="text/babel"> 
     // 1. 创建类式组件
-     class MyComponent extends React.Component {
-         render(){
-             // render 是放在哪里？  ——类(MyComponent)的原型对象上，供实例使用。
-             // render 中的this是谁？ ——MyComponent的实例对象 <=> MyComponent组件实例对象。
-            console.log("render的this",this)
-            return (
-                <h2>我是类定义的组件（适用于【复杂组件】定义）</h2>
-            )
-         }
-     }
+    class MyDemo extends React.Component {
+        render(){
+            return <h1>This is a class component, used for complex component.</h1>
+            console.log('this from render',this)
+        }
+    }
+
      // 2. 渲染组件到页面
-     ReactDOM.render(<MyComponent/>,document.getElementById('test'))
+     ReactDOM.render(<MyDemo/>,document.getElementById('test'))
      /**
       * 执行了ReactDOM.render之后，发生了什么/
       * 1. React 解析组件标签，找到了MyComponent组件。
