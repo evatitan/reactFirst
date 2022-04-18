@@ -7,21 +7,19 @@
     <title>Hello React</title>
 </head>
 <body>
-    <!--建立一个容器-->
+    <!-- create a container -->
     <div id = "test" ></div>
 
-    <!--引入react核心库-->
+    <!-- import react core library -->
     <script type="text/javascript" src="../dependent/react.development.js"></script>
-    <!--引入react-dom,用于支持react-->
+    <!-- import react-dom to suport react -->
     <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
-    <!--引入babel,用于将jsx转化为js-->
+    <!-- import babel to compile jsx to js-->
     <script type="text/javascript" src="../dependent/babel.min.js"></script>
 
 
-    <script type = "text/babel">  // 此处一定声明需要babel来处理编译。
-        // 1.创建虚拟DOM 
-        const VDOM = <p> Hello, React </p> // 此处一定不加引号，因为不是字符串。
-        // 2. 渲染虚拟DOM到页面
+    <script type = "text/babel"> 
+        const VDOM = <p> Hello, React </p> 
         ReactDOM.render(VDOM, document.getElementById("test"))
     </script>
 </body>
