@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ref in callback</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+
+    <script type="text/babel">  
+    class Demo extends React.Component{
+        showDateLeft = ()=>{
+            //console.log(this.refs.input1)
+            // ref in callback form can obtain the value of input1(this), do not use this.refs.
+            const {input1} = this
+            alert(input1.value)
+        }
+        showDateRight =()=>{
+            const {input2} = this
+            alert(input2.value)
+        }
+        render(){
+            return (
+                /**
+                 * What happend here ?
+                 * 1. currentNode indicate DOM node where ref is located now. 
+                 * When render encounter this callback, recat call and send a parameter to this callback. 
+                 * Then put this node in class instance, call as input1.
+                 * 2. Here this is the instance.
+                */
+                <div>
+                    <input ref={currentNode => this.input1 = currentNode} type="text" placeholder="点击按钮提示数据"/>&nbsp;
+                    <button onClick={this.showDateLeft}>点我提示左侧的数据</button>&nbsp;
+                    <input ref={currentNode => this.input2 = currentNode} onBlur = {this.showDateRight} type="text" placeholder="失去焦点提示数据"/>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<Demo/>,document.getElementById('test'))
+    {/* ref in callback form
+        1. Complexier, react not collect DOM node independet.
+        2. Mostly use inline callback function.
+        3. Callback will be call twice. First time send null as parameter, the second time is DOM nodo.
+    */}
+    </script>
+</body>
+</html>

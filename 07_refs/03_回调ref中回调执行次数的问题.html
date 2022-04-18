@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>callback ref</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+
+    <script type="text/babel"> 
+    class Demo extends React.Component{
+        state= {isHot:false}
+
+        showInfo=()=>{
+            const {input1}=this
+            alert(input1.value)
+        }
+        changeWeather=()=>{
+            const {isHot}=this.state
+            this.setState({isHot:!isHot})
+        }
+        saveInput=(c)=>{
+            this.input1 = c;
+            console.log('@',c)
+        }
+        render(){
+            const {isHot} = this.state
+            return (
+                /**
+                 * 如果ref回调函数是以內联函数的方式定义的，在更新过程中，它会被执行2次，第一次是传入参数null，然后第二次会传入参数DOM元素。
+                 * 这是因为在每次渲染时会创建一个新的函数实例，所以React清空旧的ref并且设置新的。
+                 * 但是通过将ref的回调函数定义成class的绑定函数的方式可以避免上述问题。但是大多数情况下时无关紧要的。
+                 * */ 
+                <div>
+                    <h2>Today's weather {isHot? 'hot' : 'cool'}</h2>
+                    {/*<input ref={(c)=>{this.input1 = c; console.log('@', c)}} type="text"/> <br/><br/>*/}
+                    {/*以上方式是写好回调函数，让react去调用. 以下方法是使用class的绑定函数方式（this.saveInput），将回调函数放在了组件实例的自身上*/}
+                    <input ref={this.saveInput} type="text"/>
+                    <button onClick={this.showInfo}>Click button to show data</button>
+                    <button onClick={this.changeWeather}>Click to change weather</button>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<Demo/>,document.getElementById('test'))
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>state shorthand</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+
+    <script type="text/babel">
+
+    class Weather extends React.Component{
+        // initialized state
+        state = {isHot:true, wind:'breeze'}
+        changeWeather = ()=>{
+            const isHot = this.state.isHot
+            this.setState({isHot:!isHot})
+            console.log(this)  // 此处验证this的方式为：以结果为导向，看看内部的this输出是什么？
+        }
+        render(){
+            const {isHot,wind} = this.state
+            return <h1 onClick={this.changeWeather}>Today's weather {this.state.isHot ? "hot" : "cool"}，{wind}</h1>
+        }
+    }
+    ReactDOM.render(<Weather/>, document.getElementById('test'))
+    /**
+    * Create a custom method in react ———— assignment statement + arrow function
+    * Assignment statement(A property that the class prototype actively adds to its instance, the name is the left, the value is the right, class prototype itself does not have, but it is attached to the instance.)
+    * Arrow function（Arrow doesn't have propio THIS, if use THIS inside it, arrow function will find a outside this to use.
+    */
+    </script>
+</body>
+</html>
