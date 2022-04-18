@@ -6,25 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello React</title>
 </head>
-<body><!---->
-    <!--建立一个容器-->
+<body>
     <div id="test"></div>
 
-    <!--引入react核心库-->
-    <script type="text/javascript" src="../dependent/react.development.js"></script>
-    <!--引入react-dom,用于支持react-->
+    <script type="text/javascript" src="../dependent/react.development.js"></script>   
     <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
-    <!--引入babel,用于将jsx转化为js-->
     <script type="text/javascript" src="../dependent/babel.min.js"></script>
 
-    <script type="text/babel">  /// 此处一定声明需要babel来处理编译。
-    /**
-     * 区分 【js语句（代码）】与【js表达式】
-     * 1. js表达式会产生一个值，可以放在任何一个需要值的地方。如：a , a+b , demo(1) , arr.map() , function test () {}
-     * 2. js语句（代码），控制代码走向：如：if () {} , for(){} , switch () {casa:...}
-    */
+    <script type="text/babel"> 
     const list = ['Java','JavaScript','Python']
-        // 1.创建虚拟DOM 
         const VDOM = (
             <div>
                 <h1>Programming languages</h1>
