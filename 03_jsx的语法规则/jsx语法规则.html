@@ -26,15 +26,20 @@
     <script type="text/babel">  // 此处一定声明需要babel来处理编译。
         const myId= "newId"
         const myData = "Hello React"
+        const myDemo = "hello new demo"
         // 1.创建虚拟DOM 
         const VDOM = (
             <div>
-                <h2 className="title" id={myId.toLowerCase()}> 
+                <h2 className="title"> 
+                    <span style={{color:"yellow",fontSize:"59px"}}>{myId.toLowerCase()}</span>
+                </h2>
+                <h2 className="title"> 
                     <span style={{color:"red",fontSize:"59px"}}>{myData.toLowerCase()}</span>
                 </h2>
-                <h2 className="title" id={myId.toUpperCase()}> 
-                    <span style={{color:"red",fontSize:"59px"}}>{myData.toLowerCase()}</span>
-                </h2>
+                <h3 className="title">
+                    <p style={{color:"whrite", fontSize:"5em"}}>{myDemo}</p>                
+                </h3>
+                <input type="text"/>
                 <input type="text"/>
             </div>
         )
