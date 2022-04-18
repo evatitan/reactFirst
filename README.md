@@ -1,4 +1,6 @@
 # 第一章：React 基础  【V1-7】
+1. Use command "npm start" to execute react app.
+
 ### 1.1  介绍
 ```
    (1). 英文官网：https://react.org/

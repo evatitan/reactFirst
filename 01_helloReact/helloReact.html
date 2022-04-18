@@ -8,7 +8,8 @@
 </head>
 <body>
     <!--建立一个容器-->
-    <div id="test"></div>
+    <div id = "test" ></div>
+    <div id = "demo" ></div>
 
     <!--引入react核心库-->
     <script type="text/javascript" src="../dependent/react.development.js"></script>
@@ -17,12 +18,13 @@
     <!--引入babel,用于将jsx转化为js-->
     <script type="text/javascript" src="../dependent/babel.min.js"></script>
 
-
     <script type="text/babel">  // 此处一定声明需要babel来处理编译。
         // 1.创建虚拟DOM 
         const VDOM = <h1>Hello, React</h1> // 此处一定不加引号，因为不是字符串。
+        const vdom = <h1>hello again, react</h1>
         // 2. 渲染虚拟DOM到页面
         ReactDOM.render(VDOM, document.getElementById("test"))
+        ReactDOM.render(vdom,document.getElementById("demo"))
     </script>
 </body>
 </html>
