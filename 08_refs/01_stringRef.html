@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_ref in string form</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+
+    <script type="text/babel"> 
+    class Demo extends React.Component{
+        showData = () => {
+            const {input1} = this.refs
+            alert(input1.value)
+        }
+
+        showDateRight =()=>{
+            const {input2} = this.refs
+            alert(input2.value)
+        }
+        render(){
+            return (
+                <div>
+                    <input ref="input1" type="text" placeholder ="click to show data"/>
+                    <button onClick = {this.showData}> Click button to show data</button>
+                    <input ref = "input2" type="text" onBlur={this.showDateRight} placeholder="click to show data" />
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<Demo/>,document.getElementById('test'))
+    // ref in string form is the simplest way to write, react independent collect DOM node where ref is located into this.refs to calling.
+    // But because its slow efficency, now people use "create.ref" method.
+    </script>
+</body>
+</html>

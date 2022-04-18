@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_create refs</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+
+    <script type="text/babel"> 
+    class Demo extends React.Component{
+        /**
+         * React.createRef调用后可以返回一个容器，该容器可以存储被ref所标识的节点。该容器“专人专用“，只能存一个，强行储存，后存储的会取代前者。
+         * 以下代码是：创建了一个容器，且挂在实例的自身上，取名为myRef。
+        */
+       myRef1 = React.createRef()
+       myRef2 = React.createRef()
+
+       showDataLeft=()=>{
+           alert(this.myRef1.current.value)
+       }
+
+       showDataRight=()=>{
+           alert(this.myRef2.current.value)
+       }
+
+        render(){
+            return (
+                <div>
+                <input ref = {this.myRef1} type="text"/> 
+                <button onClick = {this.showDataLeft} > Click to show left data </button>
+                <input ref = {this.myRef2}  onBlur = {this.showDataRight} type="text"/>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<Demo/>,document.getElementById('test'))
+    /* createRef : Compleier because it needs create container and save DOM node. But is recommended by react.*/
+    </script>
+</body>
+</html>
