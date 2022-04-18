@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello React</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+
+    <script type="text/babel"> 
+    class WeatherDemo extends React.Component{
+        constructor (props){
+            super(props)
+            this.state={isHot:true,wind:"breeze"}
+            this.demo = this.changeWeather.bind(this)
+        }
+        render(){
+            const {isHot,wind} = this.state
+            return <h1 onClick = {this.demo}> Today's Weather: {this.state.isHot ? "hot" : "cool"}, {this.state.wind}. </h1>
+        }
+        changeWeather(){
+            const isHot = this.state.isHot
+            this.setState({isHot:!isHot})
+        }
+    }
+    ReactDOM.render(<WeatherDemo/>, document.getElementById('test'))
+    </script>
+</body>
+</html>
