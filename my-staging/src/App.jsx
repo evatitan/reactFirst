@@ -1,30 +1,31 @@
-import React, { Component } from 'react';
-import './App.css';
-export default class App extends Component {
-  
-	componentDidMount() {
-		let loading = document.querySelector('.loading');
-		let letters = loading.textContent.split('');
-		loading.textContent = '';
-		letters.forEach((letter, i) => {
-			let span = document.createElement('span');
-			span.textContent = letter;
-			span.style.animationDelay = `${i / 5}s`;
-			loading.append(span);
-		});
+import React, { Component, Fragment } from 'react';
+import Header from './components/Header';
+import List from './components/List';
+import Footer from './components/Footer';
 
-		// let loading = document.querySelector('.loading');
-		// let letters = loading.textContent.split('');
-		// loading.textContent = '';
-		// letters.forEach((letter, i) => {
-		// 	let span = document.createElement('span');
-		// 	span.textContent = letter;
-		// 	span.style.animationDelay = `${i / 5}s`;
-		// 	loading.append(span);
-		// });
-	}
+export default class App extends Component {
+	state = {
+		todos: [
+			{ id: '001', name: 'eat', done: true },
+			{ id: '002', name: 'sleep', done: true },
+			{ id: '003', name: 'coding', done: false },
+			{ id: '004', name: 'shopping', done: false }
+		]
+	};
+
+	addTodo = (todoObj) => {
+		const { todos } = this.state;
+		const newTodo = [ todoObj, ...todos ];
+		this.setState({ newTodo });
+	};
 
 	render() {
-		return <div class="loading">Loading</div>;
+		return (
+			<Fragment>
+				<Header addTodo={this.addTodo} />
+				<List />
+				<Footer />
+			</Fragment>
+		);
 	}
 }
