@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>props</title>
+</head>
+<body>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+    <script src="../dependent/prop-types.js"></script>
+
+    <script type="text/babel">
+        class Person extends React.Component{
+            constructor(props){
+                // If constructor receive props and transform to super, it depends if you want to interview prop through this in contructor.
+                // If you don't need, it will be not necessary use contructor. In the development environment, rarely use it.
+                //console.log(props)
+                super(props)
+                console.log('constructor', this.props)
+            }
+            static propTypes ={
+                name:PropTypes.string.isRequired,
+                sex:PropTypes.string,
+                age:PropTypes.number,
+                speak:PropTypes.func
+            }
+            static defaultProps={
+                sex:"unknow",
+                age:18
+            }
+            render(){
+                const {name,sex,age} = this.props
+                return (
+                    <ul>
+                        <li>Name：{name}</li>
+                        <li>Sex：{sex}</li>
+                        <li>Age：{age}</li>
+                    </ul>
+                )
+            }
+        }
+        ReactDOM.render(<Person name="Tom"/>,document.getElementById('test1'))
+    </script>
+</body>
+</html>

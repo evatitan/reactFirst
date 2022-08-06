@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello React Demo</title>
+</head>
+<body>
+    <!-- create a container -->
+    <div id = "test" ></div>
+    <div id = "demo" ></div>
+
+    <!-- import react core library -->
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <!-- import react-dom support react -->
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <!-- import babel for compile jsx to js -->
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+
+    <script type="text/babel">  // Declare that babel is required to handle compilation.
+        // 1.Create virtual DOM 
+        const VDOM = <h1>Hello, React</h1> // no quotes here because is not a string.
+        const vdom = <h1>hello again, react</h1>
+        // 2. Render virtual DOM to page.
+        ReactDOM.render(VDOM, document.getElementById("test"))
+        ReactDOM.render(vdom,document.getElementById("demo"))
+    </script>
+</body>
+</html>

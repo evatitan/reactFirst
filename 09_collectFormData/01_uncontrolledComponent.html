@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uncontrolled component</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+    <script type="text/babel"> 
+    
+    class Login extends React.Component{
+
+        handleSubmit = (event) =>{
+            // ajax method to prevent submission of form data, but the data still stored in background.
+            event.preventDefault() 
+            const {username, password} = this
+            alert(`Your username is : ${username.value}. You password is ${password.value}`)
+        }
+        render(){
+            return (
+                <form action="http://www.atguigu.com" onSubmit={this.handleSubmit}>
+                   Name:<input ref={c=>{this.username=c}} type="text" name="username"/> 
+                   Possword:<input ref={c=>{this.password=c}} type="password" name="password"/>
+                   <button>Login</button>
+                </form>
+            )
+        }
+    }
+    ReactDOM.render(<Login/>, document.getElementById('test'))
+    // In most cases, we recommend using controlled components to implement forms, because the use of ref can be omitted. 
+    // In a controlled component, form data is handled by a React component. 
+    // In uncontrolled components, where form data is handled by the DOM itself.
+    </script>
+</body>
+</html>

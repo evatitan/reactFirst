@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>define component with class</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+
+    <script type="text/babel"> 
+
+    class MyDemo extends React.Component {
+        render(){
+            return <h1>This is a class component, used for complex component.</h1>
+            console.log('this from render',this)
+        }
+    }
+
+     ReactDOM.render(<MyDemo/>,document.getElementById('test'))
+    /** 
+    * After executing ReactDOM.render, what happened？
+    * 1. React parses the component tag and finds the MyComponent component.
+    * 2. It is found that the component is defined by the class, then an instance of the class is created, and the redener method on the prototype is called through the instance.
+    * 3. render converts virtual DOM into real DOM and renders it on the page.
+    */
+    </script>
+</body>
+</html>

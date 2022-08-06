@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react';
+// import react core libraries
+import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 

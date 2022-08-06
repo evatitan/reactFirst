@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>controlled component</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+    <script type="text/babel"> 
+
+    class Login extends React.Component{
+        // Initailation state for component to store data.
+        state={
+            username:'',
+            password:''
+        }
+        // Store username node value into state that obtain by event.
+        saveUsername=(event)=>{
+            this.setState({username:event.target.value})
+        }
+        // Store password node value into state that obtain by event.
+        savePassword=(event)=>{
+            this.setState({password:event.target.value})
+        }
+        // Save submission callback
+        handleSubmit =(event)=>{
+            event.preventDefault() 
+            const {username, password} = this.state
+            alert(`Your username is : ${username}. You password is ${password}`)
+        }
+        render(){
+            return (
+                // onChange method belongs to vanilla JS. Use for store data that input to DOM. 
+                <form action="http://www.atguigu.com" onSubmit={this.handleSubmit}>
+                   Name:<input onChange ={this.saveUsername} type="text" name="username"/> 
+                   Possword:<input onChange={this.savePassword} type="password" name="password"/>
+                   <button>Login</button>
+                </form>
+            )
+        }
+    }
+    ReactDOM.render(<Login/>, document.getElementById('test'))
+    // In most cases, we recommend using controlled components to implement forms,because the use of ref can be omitted. 
+    // In a controlled component, form data is handled by a React component. 
+    // In uncontrolled components, where form data is handled by the DOM itself.
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>old lifecycle</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../dependent/react.development.js"></script>
+    <script type="text/javascript" src="../dependent/react-dom.development.js"></script>
+    <script type="text/javascript" src="../dependent/babel.min.js"></script>
+    <script type="text/babel">
+        /**
+         * old lifecycle
+         * 【initialation phase】—— are called by ReactDOM.render()---initial render
+         *              1. constructor()
+         *              2. componentWillMount()
+         *              3. render()
+         *              4. componentDidMount()     =======> commonly used，generally do some initialations things such as staring timer, send requiest, subscribe message.
+         * 【update phase】—— are called by this.setState() or farther component's render function.
+         *              1. shouldComponentUpdate()   // force unistall don't need this step. It's sparked by this.forceUpdate().
+         *              2. componentWillUpdate
+         *              3. render()                =======> commonly used
+         *              4. componentDidUpdate()
+         * 【unmount phase】—— is called by ReactDOM.unmountComponentAtNode()
+         *              1.componentwillUnmount()   =======> commonly used to close timer, cancel subscribe message.
+        */
+
+        class Count extends React.Component {
+            constructor(props){
+                console.log('Count---constructor')
+                super(props)
+                this.state={count:0}
+            add=()=>{
+                const {count} = this.state
+                this.setState({count:count+1})
+            }
+            death=()=>{
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+            force=()=>{
+                this.forceUpdate()
+            }
+        }
+            // 【 this function (componentWillMount) will be abandoned in version 18. Add UNSAFE_ before 17 version 】
+            UNSAFE_componentWillMount(){
+                console.log('count---componentWillMount')
+            }
+            componentDidMount(){
+                console.log('count---componentDidMount')
+            }
+            componentWillUnmount(){
+                console.log('count---componentWillUnmount')
+            }
+            // default is true
+            shouldComponentUpdate(){
+                console.log('count---shouldComponentUpdate')
+                return true
+            }
+
+            UNSAFE_componentWillUpdate(){
+                console.log('count---componentWillUpdate')
+            }
+            componentDidUpdate(){
+                console.log('count---componentDidUpdate')
+            }
+            render(){
+                console.log('count---render')
+                const {count} = this.state
+                return (
+                    <div>
+                        <h2>Sum is {count}</h2>
+                        <button onClick = {this.add}>click to +1</button>
+                        <button onClick = {this.death}>unmount component</button>
+                        <button onClick = {this.force}> Do not change any data, force update once.</button>
+                    </div>
+                )
+            }
+        }
+        
+        // parent component A
+        class A extends React.Component{
+            state={carName:'BC'}
+            
+            changeCar=()=>{
+                this.setState({carName:"AD"})
+            }
+
+             render(){
+                 return (
+                     <div>
+                        <div>This is A component</div>
+                        <button onClick={this.changeCar}>change the car</button>
+                        {/*render child component in the parent component*/}
+                        <B carName={this.state.carName}/>
+                     </div>
+                 )
+             }
+        }
+        // child component B
+        class B extends React.Component{
+            // 组件将要接受新的props钩子， 此处注意：之前第一次传的props不算，之后的新props才算，才会进行执行，所以有人建议更名为： componentWillReceiveNewProps。
+            UNSAFE_componentWillReceiveProps(props){
+                console.log('B---componentWillReceiveProps',props)
+            }
+            shouldComponentUpdate(){
+                console.log('B---shouldComponentUpdate')
+                return true
+            }
+            UNSAFE_componentWillUpdate(){
+                console.log('B---componentWillUpdate')
+            }
+            componentDidUpdate(){
+                console.log('B---componentDidUpdate')
+            }
+             render(){
+                console.log('B---render')
+                 return (
+                     <div>This is B component，received a car is {this.props.carName}</div>
+                 )
+             }
+        }
+
+        //ReactDOM.render(<Count/>,document.getElementById("test"))
+        ReactDOM.render(<A/>,document.getElementById("test"))
+    </script>
+</body>
+</html>
